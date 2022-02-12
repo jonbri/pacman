@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # 1. build 'pacman.js' by concatenating files specified in js_order
-# 2. update time stamp in index.htm
+# 2. update time stamp in index.html
 # 3. build debug.htm with individual script includes
 
 output="pacman.js"
@@ -82,7 +82,7 @@ done
 echo "})();" >> $output
 
 # update time stamp
-sed -i "s/last updated:[^<]*/last updated: $(date)/" index.htm
+sed -i "s/last updated:[^<]*/last updated: $(date)/" index.html
 
-# build debug.htm from index.htm adding debug includes
-sed "s:.*$output.*:$debug_includes:" index.htm > debug.htm
+# build debug.htm from index.html adding debug includes
+sed "s:.*$output.*:$debug_includes:" index.html > debug.htm

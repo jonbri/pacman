@@ -299,11 +299,19 @@ var addScore = function(p) {
     // get current scores
     var score = getScore();
 
-    // handle extra life at 10000 points
-    if (score < 10000 && score+p >= 10000) {
-        extraLives++;
-        renderer.drawMap();
+    // handle extra lives
+    var extraLifeInterval = 10000;
+    var extraLifePoints = [];
+    for (var i = 0; i < 5000000; i += extraLifeInterval) {
+      extraLifePoints.push(i);
     }
+    extraLifePoints.forEach((interval) => {
+      if (score < interval && score+p >= interval) {
+          extraLives++;
+          renderer.drawMap();
+          window.ticker.print("Extra life!");
+      }
+    });
 
     score += p;
     setScore(score);
@@ -9486,14 +9494,6 @@ var homeState = (function(){
         },
         function(ctx,x,y,frame) {
             atlas.drawMsPacmanSprite(ctx,x,y,DIR_RIGHT,getIconAnimFrame(frame));
-        });		
-	menu.addTextIconButton(getGameName(GAME_OTTO),
-        function() {
-            gameMode = GAME_OTTO;
-            exitTo(preNewGameState);
-        },
-        function(ctx,x,y,frame) {
-            atlas.drawOttoSprite(ctx,x,y,DIR_RIGHT,getIconAnimFrame(frame));
         });
     menu.addTextIconButton(getGameName(GAME_COOKIE),
         function() {
@@ -9512,6 +9512,13 @@ var homeState = (function(){
         function(ctx,x,y,frame) {
             atlas.drawGhostSprite(ctx,x,y,Math.floor(frame/8)%2,DIR_RIGHT,false,false,false,blinky.color);
         });
+
+    setTimeout(function() {
+      practiceMode = false;
+      turboMode = false;
+      newGameState.setStartLevel(1);
+      exitTo(newGameState, 60);
+    }, 250);
 
     return {
         init: function() {
@@ -10532,7 +10539,7 @@ var aboutState = (function(){
 
 var newGameState = (function() {
     var frames;
-    var duration = 2;
+    var duration = 1;
     var startLevel = 1;
 
     return {
@@ -10574,7 +10581,7 @@ var newGameState = (function() {
 
 var readyState =  (function(){
     var frames;
-    var duration = 2;
+    var duration = 1;
     
     return {
         init: function() {
@@ -11180,23 +11187,23 @@ var overState = (function() {
     addKeyDown(KEY_M, function() { switchState(finishState); }, function() { return state == playState; });
 
     // Draw Actor Targets (fishpoles)
-    addKeyDown(KEY_Q, function() { blinky.isDrawTarget = !blinky.isDrawTarget; }, isPracticeMode);
-    addKeyDown(KEY_W, function() { pinky.isDrawTarget = !pinky.isDrawTarget; }, isPracticeMode);
-    addKeyDown(KEY_E, function() { inky.isDrawTarget = !inky.isDrawTarget; }, isPracticeMode);
-    addKeyDown(KEY_R, function() { clyde.isDrawTarget = !clyde.isDrawTarget; }, isPracticeMode);
-    addKeyDown(KEY_T, function() { pacman.isDrawTarget = !pacman.isDrawTarget; }, isPracticeMode);
+    addKeyDown(KEY_Q, function() { blinky.isDrawTarget = !blinky.isDrawTarget; }, false);
+    addKeyDown(KEY_W, function() { pinky.isDrawTarget = !pinky.isDrawTarget; }, false);
+    addKeyDown(KEY_E, function() { inky.isDrawTarget = !inky.isDrawTarget; }, false);
+    addKeyDown(KEY_R, function() { clyde.isDrawTarget = !clyde.isDrawTarget; }, false);
+    addKeyDown(KEY_T, function() { pacman.isDrawTarget = !pacman.isDrawTarget; }, false);
 
     // Draw Actor Paths
-    addKeyDown(KEY_A, function() { blinky.isDrawPath = !blinky.isDrawPath; }, isPracticeMode);
-    addKeyDown(KEY_S, function() { pinky.isDrawPath = !pinky.isDrawPath; }, isPracticeMode);
-    addKeyDown(KEY_D, function() { inky.isDrawPath = !inky.isDrawPath; }, isPracticeMode);
-    addKeyDown(KEY_F, function() { clyde.isDrawPath = !clyde.isDrawPath; }, isPracticeMode);
-    addKeyDown(KEY_G, function() { pacman.isDrawPath = !pacman.isDrawPath; }, isPracticeMode);
+    addKeyDown(KEY_A, function() { blinky.isDrawPath = !blinky.isDrawPath; }, false);
+    addKeyDown(KEY_S, function() { pinky.isDrawPath = !pinky.isDrawPath; }, false);
+    addKeyDown(KEY_D, function() { inky.isDrawPath = !inky.isDrawPath; }, false);
+    addKeyDown(KEY_F, function() { clyde.isDrawPath = !clyde.isDrawPath; }, false);
+    addKeyDown(KEY_G, function() { pacman.isDrawPath = !pacman.isDrawPath; }, false);
 
     // Miscellaneous Cheats
-    addKeyDown(KEY_I, function() { pacman.invincible = !pacman.invincible; }, isPracticeMode);
-    addKeyDown(KEY_O, function() { turboMode = !turboMode; }, isPracticeMode);
-    addKeyDown(KEY_P, function() { pacman.ai = !pacman.ai; }, isPracticeMode);
+    addKeyDown(KEY_I, function() { pacman.invincible = !pacman.invincible; }, false);
+    addKeyDown(KEY_O, function() { turboMode = !turboMode; }, false);
+    addKeyDown(KEY_P, function() { pacman.ai = !pacman.ai; }, false);
 
     addKeyDown(KEY_END, function() { executive.togglePause(); });
 
@@ -12376,44 +12383,6 @@ var isInCutScene = function() {
 
 // TODO: no cutscene after board 17 (last one after completing board 17)
 var triggerCutsceneAtEndLevel = function() {
-    if (gameMode == GAME_PACMAN) {
-        if (level == 2) {
-            playCutScene(pacmanCutscene1, readyNewState);
-            return true;
-        }
-        /*
-        else if (level == 5) {
-            playCutScene(pacmanCutscene2, readyNewState);
-            return true;
-        }
-        else if (level >= 9 && (level-9)%4 == 0) {
-            playCutScene(pacmanCutscene3, readyNewState);
-            return true;
-        }
-        */
-    }
-    else if (gameMode == GAME_MSPACMAN || gameMode == GAME_OTTO) {
-        if (level == 2) {
-            playCutScene(mspacmanCutscene1, readyNewState);
-            return true;
-        }
-        else if (level == 5) {
-            playCutScene(mspacmanCutscene2, readyNewState);
-            return true;
-        }
-    }
-    else if (gameMode == GAME_COOKIE) {
-        if (level == 2) {
-            playCutScene(cookieCutscene1, readyNewState);
-            return true;
-        }
-        else if (level == 5) {
-            playCutScene(cookieCutscene2, readyNewState);
-            return true;
-        }
-    }
-
-    // no cutscene triggered
     return false;
 };
 
