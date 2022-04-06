@@ -1092,44 +1092,6 @@ var isInCutScene = function() {
 
 // TODO: no cutscene after board 17 (last one after completing board 17)
 var triggerCutsceneAtEndLevel = function() {
-    if (gameMode == GAME_PACMAN) {
-        if (level == 2) {
-            playCutScene(pacmanCutscene1, readyNewState);
-            return true;
-        }
-        /*
-        else if (level == 5) {
-            playCutScene(pacmanCutscene2, readyNewState);
-            return true;
-        }
-        else if (level >= 9 && (level-9)%4 == 0) {
-            playCutScene(pacmanCutscene3, readyNewState);
-            return true;
-        }
-        */
-    }
-    else if (gameMode == GAME_MSPACMAN || gameMode == GAME_OTTO) {
-        if (level == 2) {
-            playCutScene(mspacmanCutscene1, readyNewState);
-            return true;
-        }
-        else if (level == 5) {
-            playCutScene(mspacmanCutscene2, readyNewState);
-            return true;
-        }
-    }
-    else if (gameMode == GAME_COOKIE) {
-        if (level == 2) {
-            playCutScene(cookieCutscene1, readyNewState);
-            return true;
-        }
-        else if (level == 5) {
-            playCutScene(cookieCutscene2, readyNewState);
-            return true;
-        }
-    }
-
-    // no cutscene triggered
     return false;
 };
 
