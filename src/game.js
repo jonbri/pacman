@@ -226,11 +226,19 @@ var addScore = function(p) {
     // get current scores
     var score = getScore();
 
-    // handle extra life at 10000 points
-    if (score < 10000 && score+p >= 10000) {
-        extraLives++;
-        renderer.drawMap();
+    // handle extra lives
+    var extraLifeInterval = 10000;
+    var extraLifePoints = [];
+    for (var i = 0; i < 5000000; i += extraLifeInterval) {
+      extraLifePoints.push(i);
     }
+    extraLifePoints.forEach((interval) => {
+      if (score < interval && score+p >= interval) {
+          extraLives++;
+          renderer.drawMap();
+          window.ticker.print("Extra life!");
+      }
+    });
 
     score += p;
     setScore(score);
