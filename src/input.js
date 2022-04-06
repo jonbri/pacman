@@ -171,23 +171,23 @@
     addKeyDown(KEY_M, function() { switchState(finishState); }, function() { return state == playState; });
 
     // Draw Actor Targets (fishpoles)
-    addKeyDown(KEY_Q, function() { blinky.isDrawTarget = !blinky.isDrawTarget; }, isPracticeMode);
-    addKeyDown(KEY_W, function() { pinky.isDrawTarget = !pinky.isDrawTarget; }, isPracticeMode);
-    addKeyDown(KEY_E, function() { inky.isDrawTarget = !inky.isDrawTarget; }, isPracticeMode);
-    addKeyDown(KEY_R, function() { clyde.isDrawTarget = !clyde.isDrawTarget; }, isPracticeMode);
-    addKeyDown(KEY_T, function() { pacman.isDrawTarget = !pacman.isDrawTarget; }, isPracticeMode);
+    addKeyDown(KEY_Q, function() { blinky.isDrawTarget = !blinky.isDrawTarget; }, false);
+    addKeyDown(KEY_W, function() { pinky.isDrawTarget = !pinky.isDrawTarget; }, false);
+    addKeyDown(KEY_E, function() { inky.isDrawTarget = !inky.isDrawTarget; }, false);
+    addKeyDown(KEY_R, function() { clyde.isDrawTarget = !clyde.isDrawTarget; }, false);
+    addKeyDown(KEY_T, function() { pacman.isDrawTarget = !pacman.isDrawTarget; }, false);
 
     // Draw Actor Paths
-    addKeyDown(KEY_A, function() { blinky.isDrawPath = !blinky.isDrawPath; }, isPracticeMode);
-    addKeyDown(KEY_S, function() { pinky.isDrawPath = !pinky.isDrawPath; }, isPracticeMode);
-    addKeyDown(KEY_D, function() { inky.isDrawPath = !inky.isDrawPath; }, isPracticeMode);
-    addKeyDown(KEY_F, function() { clyde.isDrawPath = !clyde.isDrawPath; }, isPracticeMode);
-    addKeyDown(KEY_G, function() { pacman.isDrawPath = !pacman.isDrawPath; }, isPracticeMode);
+    addKeyDown(KEY_A, function() { blinky.isDrawPath = !blinky.isDrawPath; }, false);
+    addKeyDown(KEY_S, function() { pinky.isDrawPath = !pinky.isDrawPath; }, false);
+    addKeyDown(KEY_D, function() { inky.isDrawPath = !inky.isDrawPath; }, false);
+    addKeyDown(KEY_F, function() { clyde.isDrawPath = !clyde.isDrawPath; }, false);
+    addKeyDown(KEY_G, function() { pacman.isDrawPath = !pacman.isDrawPath; }, false);
 
     // Miscellaneous Cheats
-    addKeyDown(KEY_I, function() { pacman.invincible = !pacman.invincible; }, isPracticeMode);
-    addKeyDown(KEY_O, function() { turboMode = !turboMode; }, isPracticeMode);
-    addKeyDown(KEY_P, function() { pacman.ai = !pacman.ai; }, isPracticeMode);
+    addKeyDown(KEY_I, function() { pacman.invincible = !pacman.invincible; }, false);
+    addKeyDown(KEY_O, function() { turboMode = !turboMode; }, false);
+    addKeyDown(KEY_P, function() { pacman.ai = !pacman.ai; }, false);
 
     addKeyDown(KEY_END, function() { executive.togglePause(); });
 
