@@ -1154,7 +1154,7 @@ var aboutState = (function(){
 
 var newGameState = (function() {
     var frames;
-    var duration = 2;
+    var duration = 1;
     var startLevel = 1;
 
     return {
@@ -1196,7 +1196,7 @@ var newGameState = (function() {
 
 var readyState =  (function(){
     var frames;
-    var duration = 2;
+    var duration = 1;
     
     return {
         init: function() {
