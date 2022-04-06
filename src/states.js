@@ -135,6 +135,13 @@ var homeState = (function(){
             atlas.drawGhostSprite(ctx,x,y,Math.floor(frame/8)%2,DIR_RIGHT,false,false,false,blinky.color);
         });
 
+    setTimeout(function() {
+      practiceMode = false;
+      turboMode = false;
+      newGameState.setStartLevel(1);
+      exitTo(newGameState, 60);
+    }, 250);
+
     return {
         init: function() {
             menu.enable();
