@@ -57,21 +57,39 @@
     <div style='font-family: ArcadeR'> </div>
     <canvas id='canvas'><div id="canvas-warning">Your browser does not support HTML Canvas.  Please upgrade!</div></canvas>
     <canvas id='atlas' style="display:none"></canvas>
-    <div style="position: fixed; left: 0; top: 0; color: red">
+    <div style="position: fixed; left: 0; top: 0; color: yellow">
       <h1 style="color: yellow;font-size: 18px; font-weight: bold; margin: 0; padding: 0"><a style="color: yellow" href="https://github.com/jonbri/pacman">My Fork</a></h1>
       <a style="color:yellow" href="./index.orig.html">Original</a>
       <div><span style="color: gold">177480</span> (APR17'22)</div>
       <div><span style="color: gold">22</span> (APR17'22)</div>
-      <div id="log"></div>
+      <div>--</div>
+      <div>Opponent: <span id="toBeat"></span></div>
+      <div>Time: <span id="timer"></span></div>
+      <div id="kill-log" style="max-width:100px"></div>
     </div>
 
   <script>
-    var log = document.getElementById("log");
-    function addLog(s) {
-      var l = document.createElement('div')
-      l.innerHTML = s;
-      log.append(l);
+    var toBeat = document.getElementById("toBeat");
+    var killLog = document.getElementById("kill-log");
+    var timer = document.getElementById("timer");
+    function addKillLog(s) {
+      var l = document.createElement('span')
+      l.innerHTML = s + ' ';
+      killLog.append(l);
     }
+    addKillLog("Kills: ");
+
+    // https://stackoverflow.com/a/7228322/2295034
+    function randomIntFromInterval(min, max) {
+      return Math.floor(Math.random() * (max - min + 1) + min)
+    }
+    toBeat.innerHTML = randomIntFromInterval(3, 11);
+
+    // timer
+    var timerCount = 0;
+    setInterval(function() {
+      timer.innerHTML = timerCount++;
+    }, 1000);
   </script>
 </body>
 

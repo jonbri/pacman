@@ -1318,10 +1318,11 @@ var playState = {
                 }
                 else if (pacman.invincible) // pass through ghost
                     continue;
-                else // killed by ghost
+                else { // killed by ghost
                     switchState(deadState);
+                    addKillLog(level);
+                }
 
-                addLog('Killed at level ' + level);
                 return true;
             }
         }
