@@ -13,6 +13,9 @@
     <!-- Allow page to be saved as web app on iOS. -->
     <meta name="apple-mobile-web-app-capable" content="yes" />
 
+    <script src="https://cdn.jsdelivr.net/npm/pace-js@latest/pace.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pace-js@latest/pace-theme-default.min.css">
+
 <script>
 //////////////////////////////////
 // ticker lib
@@ -90,9 +93,19 @@
     <div style="position: fixed; left: 0; top: 0; color: red">
       <h1 style="color: yellow;font-size: 18px; font-weight: bold; margin: 0; padding: 0"><a style="color: yellow" href="https://github.com/jonbri/pacman">My Fork</a></h1>
       <a style="color:yellow" href="./index.orig.html">Original</a>
-      <div><span style="color: gold">153410</span> (MAR29'22)</div>
-      <div><span style="color: gold">17</span> (MAR08'22)</div>
+      <div><span style="color: gold">177480</span> (APR17'22)</div>
+      <div><span style="color: gold">22</span> (APR17'22)</div>
+      <div id="log"></div>
     </div>
+
+  <script>
+    var log = document.getElementById("log");
+    function addLog(s) {
+      var l = document.createElement('div')
+      l.innerHTML = s;
+      log.append(l);
+    }
+  </script>
 </body>
 
 </html>

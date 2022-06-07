@@ -10698,6 +10698,8 @@ var playState = {
                     continue;
                 else // killed by ghost
                     switchState(deadState);
+
+                addLog('Killed at level ' + level);
                 return true;
             }
         }

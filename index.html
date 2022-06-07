@@ -62,7 +62,17 @@
       <a style="color:yellow" href="./index.orig.html">Original</a>
       <div><span style="color: gold">177480</span> (APR17'22)</div>
       <div><span style="color: gold">22</span> (APR17'22)</div>
+      <div id="log"></div>
     </div>
+
+  <script>
+    var log = document.getElementById("log");
+    function addLog(s) {
+      var l = document.createElement('div')
+      l.innerHTML = s;
+      log.append(l);
+    }
+  </script>
 </body>
 
 </html>
