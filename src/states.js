@@ -1314,13 +1314,14 @@ var playState = {
             if (g.tile.x == pacman.tile.x && g.tile.y == pacman.tile.y && g.mode == GHOST_OUTSIDE) {
                 if (g.scared) { // eat ghost
                     energizer.addPoints();
+                    incrementKills();
                     g.onEaten();
                 }
                 else if (pacman.invincible) // pass through ghost
                     continue;
                 else { // killed by ghost
                     switchState(deadState);
-                    addKillLog(level);
+                    addKilledLog(level);
                 }
 
                 return true;

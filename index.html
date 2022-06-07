@@ -58,37 +58,59 @@
     <canvas id='canvas'><div id="canvas-warning">Your browser does not support HTML Canvas.  Please upgrade!</div></canvas>
     <canvas id='atlas' style="display:none"></canvas>
     <div style="position: fixed; left: 0; top: 0; color: yellow">
-      <h1 style="color: yellow;font-size: 18px; font-weight: bold; margin: 0; padding: 0"><a style="color: yellow" href="https://github.com/jonbri/pacman">My Fork</a></h1>
-      <a style="color:yellow" href="./index.orig.html">Original</a>
+      <a style="color: yellow" href="./">Refresh</a>
+      <a style="color: yellow" href="./index.orig.html">Original</a>
+      <a style="color: yellow" href="https://github.com/jonbri/pacman">Fork</a>
       <div><span style="color: gold">177480</span> (APR17'22)</div>
       <div><span style="color: gold">22</span> (APR17'22)</div>
       <div>--</div>
       <div>Opponent: <span id="toBeat"></span></div>
       <div>Time: <span id="timer"></span></div>
-      <div id="kill-log" style="max-width:100px"></div>
+      <div id="kills-log" style="max-width:100px"></div>
+      <div id="killed-log" style="max-width:100px"></div>
     </div>
 
   <script>
-    var toBeat = document.getElementById("toBeat");
-    var killLog = document.getElementById("kill-log");
-    var timer = document.getElementById("timer");
-    function addKillLog(s) {
-      var l = document.createElement('span')
-      l.innerHTML = s + ' ';
-      killLog.append(l);
-    }
-    addKillLog("Kills: ");
-
     // https://stackoverflow.com/a/7228322/2295034
     function randomIntFromInterval(min, max) {
       return Math.floor(Math.random() * (max - min + 1) + min)
     }
-    toBeat.innerHTML = randomIntFromInterval(3, 11);
+    function getOpponentScore() {
+      var easy = randomIntFromInterval(1, 5);
+      var medium = randomIntFromInterval(3, 7);
+      var hard = randomIntFromInterval(5, 11);
+      return easy + ' ' + medium + ' ' + hard;
+    }
+  </script>
+
+  <script>
+    var toBeat = document.getElementById("toBeat");
+    var killedLog = document.getElementById("killed-log");
+    var killsLog = document.getElementById("kills-log");
+    var timer = document.getElementById("timer");
+    function addKilledLog(s) {
+      var l = document.createElement('span')
+      l.innerHTML = s + ' ';
+      killedLog.append(l);
+    }
+    addKilledLog("Killed: ");
+
+    var killCount = -1;
+    function incrementKills() {
+      killCount++;
+      killsLog.innerHTML = "Kills: " + killCount;
+    }
+    incrementKills();
+
+    toBeat.innerHTML = getOpponentScore();
 
     // timer
     var timerCount = 0;
     setInterval(function() {
-      timer.innerHTML = timerCount++;
+      const mins = Math.floor(timerCount / 60);
+      const secs = timerCount % 60;
+      timer.innerHTML = mins + 'm ' + secs + 's';
+      timerCount++;
     }, 1000);
   </script>
 </body>
