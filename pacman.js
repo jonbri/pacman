@@ -8938,6 +8938,7 @@ BaseFruit.prototype = {
     },
     testCollide: function() {
         if (this.isPresent() && this.isCollide()) {
+            incrementFruit();
             addScore(this.getPoints());
             this.reset();
             this.scoreFramesLeft = this.scoreDuration*60;

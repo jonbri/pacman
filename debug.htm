@@ -99,6 +99,7 @@
       <div>--</div>
       <div>Opponent: <span id="toBeat"></span></div>
       <div>Time: <span id="timer"></span></div>
+      <div id="fruit-log" style="max-width:100px"></div>
       <div id="kills-log" style="max-width:100px"></div>
       <div style="max-width:100px">
         <table id="killed-log"></table>
@@ -122,6 +123,7 @@
     var toBeat = document.getElementById("toBeat");
     var killedLog = document.getElementById("killed-log");
     var killsLog = document.getElementById("kills-log");
+    var fruitLog = document.getElementById("fruit-log");
     var timer = document.getElementById("timer");
 
     var killedAggregate = [];
@@ -159,6 +161,13 @@
       killsLog.innerHTML = "Kills: " + killCount;
     }
     incrementKills();
+
+    var fruitCount = -1;
+    function incrementFruit() {
+      fruitCount++;
+      fruitLog.innerHTML = "Fruit: " + fruitCount;
+    }
+    incrementFruit();
 
     toBeat.innerHTML = getOpponentScore();
 
