@@ -93,21 +93,27 @@
     var fruitLog = document.getElementById("fruit-log");
     var timer = document.getElementById("timer");
 
+    var _level = 1;
+    function setLevel(i) {
+      _level = i;
+      addKilledLog(-1);
+    }
+
     var killedAggregate = [];
     function addKilledLog(i) {
-      killedAggregate.push(i)
+      if (i > 0)
+        killedAggregate.push(i)
       while(killedLog.firstChild)
           killedLog.removeChild(killedLog.firstChild);
 
-      var highestLevel = Math.max.apply(Math, killedAggregate)
-      for (var i = 1; i <= highestLevel; i++) {
-
+      var highestLevel = _level;
+      for (var k = 1; k <= highestLevel; k++) {
         var tr = document.createElement('tr')
         var td0 = document.createElement('th')
         var td1 = document.createElement('td')
-        td0.innerHTML = i + ':';
+        td0.innerHTML = k + ':';
 
-        var howManyPerLevel = killedAggregate.filter((x) => x === i).length;
+        var howManyPerLevel = killedAggregate.filter((x) => x === k).length;
 
         var xString = '';
         for (var j = 0; j < howManyPerLevel; j++) {
@@ -121,6 +127,7 @@
         killedLog.append(tr);
       }
     }
+    addKilledLog(-1);
 
     var killCount = -1;
     function incrementKills() {
