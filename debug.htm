@@ -100,7 +100,9 @@
       <div>Opponent: <span id="toBeat"></span></div>
       <div>Time: <span id="timer"></span></div>
       <div id="kills-log" style="max-width:100px"></div>
-      <div id="killed-log" style="max-width:100px"></div>
+      <div style="max-width:100px">
+        <table id="killed-log"></table>
+      </div>
     </div>
 
   <script>
@@ -121,17 +123,40 @@
     var killedLog = document.getElementById("killed-log");
     var killsLog = document.getElementById("kills-log");
     var timer = document.getElementById("timer");
-    function addKilledLog(s) {
-      var l = document.createElement('span')
-      l.innerHTML = s + ' ';
-      killedLog.append(l);
+
+    var killedAggregate = [];
+    function addKilledLog(i) {
+      killedAggregate.push(i)
+      while(killedLog.firstChild)
+          killedLog.removeChild(killedLog.firstChild);
+
+      var highestLevel = Math.max.apply(Math, killedAggregate)
+      for (var i = 1; i <= highestLevel; i++) {
+
+        var tr = document.createElement('tr')
+        var td0 = document.createElement('th')
+        var td1 = document.createElement('td')
+        td0.innerHTML = i + ':';
+
+        var howManyPerLevel = killedAggregate.filter((x) => x === i).length;
+
+        var xString = '';
+        for (var j = 0; j < howManyPerLevel; j++) {
+          xString += "x";
+        }
+
+        td1.innerHTML = xString;
+
+        tr.append(td0)
+        tr.append(td1)
+        killedLog.append(tr);
+      }
     }
-    addKilledLog("Kd: ");
 
     var killCount = -1;
     function incrementKills() {
       killCount++;
-      killsLog.innerHTML = "K: " + killCount;
+      killsLog.innerHTML = "Kills: " + killCount;
     }
     incrementKills();
 
@@ -139,7 +164,7 @@
 
     // timer
     var timerCount = 0;
-    setInterval(function() {
+    var timerInterval = setInterval(function() {
       const mins = Math.floor(timerCount / 60);
       const secs = timerCount % 60;
       timer.innerHTML = mins + 'm ' + secs + 's';

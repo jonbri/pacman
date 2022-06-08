@@ -11003,6 +11003,7 @@ var overState = (function() {
             frames = 0;
         },
         draw: function() {
+            clearInterval(timerInterval);
             renderer.blitMap();
             renderer.drawScore();
             renderer.drawMessage("GAME  OVER", "#F00", 9, 20);
