@@ -10,6 +10,7 @@ function getOpponentScore() {
 }
 
 var gameLog = document.getElementById("game-log");
+var loading = document.getElementById("loading");
 var toBeat = document.getElementById("toBeat");
 var killedLog = document.getElementById("killed-log");
 var killsLog = document.getElementById("kills-log");
@@ -20,6 +21,7 @@ var timer = document.getElementById("timer");
 
 // avoid initial movement
 setTimeout(() => {
+  loading.style.display = 'none'
   gameLog.style.display = 'block'
 }, 1000);
 
