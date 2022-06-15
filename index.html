@@ -74,18 +74,16 @@
 
         <table>
           <tr>
-            <th>Fruit:</th>
+            <th>Fruit&nbsp;</th>
             <td><span id="fruit-log" /></td>
           <tr>
           <tr>
-            <th>Kills:</th>
+            <th>Kills&nbsp;</th>
             <td><span id="kills-log" /></td>
           <tr>
-
-          <div>
-            <table id="killed-log"></table>
-          </div>
         <table>
+
+        <table id="killed-log"></table>
       </div>
     </div>
 
@@ -143,7 +141,7 @@
         var tr = document.createElement('tr')
         var td0 = document.createElement('th')
         var td1 = document.createElement('td')
-        td0.innerHTML = k + ':';
+        td0.innerHTML = k + ' ';
 
         var howManyPerLevel = killedAggregate.filter((x) => x === k).length;
 
