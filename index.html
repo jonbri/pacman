@@ -58,21 +58,34 @@
     <div style='font-family: ArcadeR'> </div>
     <canvas id='canvas'><div id="canvas-warning">Your browser does not support HTML Canvas.  Please upgrade!</div></canvas>
     <canvas id='atlas' style="display:none"></canvas>
-    <div style="position: fixed; left: 0; top: 0; color: yellow">
-      <a style="color: yellow" href="./">Refresh</a>
-      <a style="color: yellow" href="./index.orig.html">Original</a>
-      <a style="color: yellow" href="https://github.com/jonbri/pacman">Fork</a>
-      <div><span style="color: gold">177480</span> (APR17'22)</div>
-      <div><span style="color: gold">22</span> (APR17'22)</div>
+    <div id="scoreboard">
+      <a href="./">refresh</a>
+      <a href="./index.orig.html">original</a>
+      <a href="https://github.com/jonbri/pacman">github</a>
+      <div>22 / 177480 (APR17'22)</div>
       <div>--</div>
-      <div>Opponent: <span id="toBeat"></span></div>
-      <div>Time: <span id="timer"></span></div>
-      <div id="level-log" style="max-width:100px"></div>
-      <div id="points-log" style="max-width:100px"></div>
-      <div id="fruit-log" style="max-width:100px"></div>
-      <div id="kills-log" style="max-width:100px"></div>
-      <div style="max-width:100px">
-        <table id="killed-log"></table>
+      <div id="game-log" style="display:none">
+        <div>
+          <span id="timer"></span>&nbsp;/
+          <span id="level-log"></span>&nbsp;/
+          <span id="points-log"></span>
+        </div>
+        <div id="toBeat"></div>
+
+        <table>
+          <tr>
+            <th>Fruit:</th>
+            <td><span id="fruit-log" /></td>
+          <tr>
+          <tr>
+            <th>Kills:</th>
+            <td><span id="kills-log" /></td>
+          <tr>
+
+          <div>
+            <table id="killed-log"></table>
+          </div>
+        <table>
       </div>
     </div>
 
@@ -90,6 +103,7 @@
   </script>
 
   <script>
+    var gameLog = document.getElementById("game-log");
     var toBeat = document.getElementById("toBeat");
     var killedLog = document.getElementById("killed-log");
     var killsLog = document.getElementById("kills-log");
@@ -97,6 +111,11 @@
     var pointsLog = document.getElementById("points-log");
     var fruitLog = document.getElementById("fruit-log");
     var timer = document.getElementById("timer");
+
+    // avoid initial movement
+    setTimeout(() => {
+      gameLog.style.display = 'block'
+    }, 1000);
 
     var _level = 1;
     function setLevel(i) {
@@ -106,10 +125,10 @@
     }
 
     function printLevel() {
-      levelLog.innerHTML = `Level: ${_level}`;
+      levelLog.innerHTML = _level;
     }
     function printPoints(points) {
-      pointsLog.innerHTML = `Points: ${points}`;
+      pointsLog.innerHTML = points;
     }
 
     var killedAggregate = [];
@@ -145,7 +164,7 @@
     var killCount = -1;
     function incrementKills() {
       killCount++;
-      killsLog.innerHTML = "Kills: " + killCount;
+      killsLog.innerHTML = killCount;
     }
     incrementKills();
 
@@ -155,9 +174,9 @@
       fruitCount++;
       if (_level >= 13) {
         keyCount++;
-        fruitLog.innerHTML = `Fruit: ${fruitCount} (${keyCount})`
+        fruitLog.innerHTML = `${fruitCount} (${keyCount})`
       } else {
-        fruitLog.innerHTML = "Fruit: " + fruitCount;
+        fruitLog.innerHTML = fruitCount;
       }
     }
     incrementFruit();
