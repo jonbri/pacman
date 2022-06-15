@@ -170,9 +170,15 @@
     incrementKills();
 
     var fruitCount = -1;
+    var keyCount = 0;
     function incrementFruit() {
       fruitCount++;
-      fruitLog.innerHTML = "Fruit: " + fruitCount;
+      if (true || _level >= 13) {
+        keyCount++;
+        fruitLog.innerHTML = `Fruit: ${fruitCount} (${keyCount})`
+      } else {
+        fruitLog.innerHTML = "Fruit: " + fruitCount;
+      }
     }
     incrementFruit();
 
