@@ -14,7 +14,7 @@ body {
   font-size: 1.5em;
 }
 
-#scoreboard {
+#static-content {
   font-family: courier;
   position: fixed;
   left: 0;
@@ -23,21 +23,21 @@ body {
   font-size: 16px;
 }
 
-#scoreboard a {
+#static-content a {
   color: yellow;
 }
 
-table {
+#static-content table {
   margin: 0;
   padding: 0;
 }
-table th {
+#static-content table th {
   text-align: left;
   margin: 0;
   padding: 0;
   font-weight: normal;
 }
-table td {
+#static-content table td {
   margin: 0;
   padding: 0;
 }
