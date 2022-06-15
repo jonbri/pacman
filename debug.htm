@@ -99,6 +99,8 @@
       <div>--</div>
       <div>Opponent: <span id="toBeat"></span></div>
       <div>Time: <span id="timer"></span></div>
+      <div id="level-log" style="max-width:100px"></div>
+      <div id="points-log" style="max-width:100px"></div>
       <div id="fruit-log" style="max-width:100px"></div>
       <div id="kills-log" style="max-width:100px"></div>
       <div style="max-width:100px">
@@ -123,6 +125,8 @@
     var toBeat = document.getElementById("toBeat");
     var killedLog = document.getElementById("killed-log");
     var killsLog = document.getElementById("kills-log");
+    var levelLog = document.getElementById("level-log");
+    var pointsLog = document.getElementById("points-log");
     var fruitLog = document.getElementById("fruit-log");
     var timer = document.getElementById("timer");
 
@@ -130,6 +134,14 @@
     function setLevel(i) {
       _level = i;
       addKilledLog(-1);
+      printLevel();
+    }
+
+    function printLevel() {
+      levelLog.innerHTML = `Level: ${_level}`;
+    }
+    function printPoints(points) {
+      pointsLog.innerHTML = `Points: ${points}`;
     }
 
     var killedAggregate = [];
@@ -173,7 +185,7 @@
     var keyCount = 0;
     function incrementFruit() {
       fruitCount++;
-      if (true || _level >= 13) {
+      if (_level >= 13) {
         keyCount++;
         fruitLog.innerHTML = `Fruit: ${fruitCount} (${keyCount})`
       } else {

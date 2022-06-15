@@ -328,6 +328,7 @@ var getScore = function() {
 };
 var setScore = function(score) {
     scores[getScoreIndex()] = score;
+    printPoints(score);
 };
 
 var getHighScore = function() {
