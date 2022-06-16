@@ -8911,6 +8911,11 @@ BaseFruit.prototype = {
         this.currentFruitIndex = i;
     },
     onDotEat: function() {
+        var limit = Math.min(this.dotLimit1, this.dotLimit2);
+        var dotsUntilInitiate = limit - map.dotsEaten;
+        if (dotsUntilInitiate > 0 && dotsUntilInitiate <= 5) {
+            ticker.print(dotsUntilInitiate.toString());
+        }
         if (!this.isPresent() && (map.dotsEaten == this.dotLimit1 || map.dotsEaten == this.dotLimit2)) {
             this.initiate();
         }
