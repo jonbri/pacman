@@ -17,6 +17,7 @@ var killsLog = document.getElementById("kills-log");
 var levelLog = document.getElementById("level-log");
 var pointsLog = document.getElementById("points-log");
 var fruitLog = document.getElementById("fruit-log");
+var keysLog = document.getElementById("keys-log");
 var timer = document.getElementById("timer");
 
 // avoid initial movement
@@ -78,18 +79,19 @@ function incrementKills() {
 }
 incrementKills();
 
-var fruitCount = -1;
+var fruitCount = 0;
 var keyCount = 0;
 function incrementFruit() {
-  fruitCount++;
   if (_level >= 13) {
     keyCount++;
-    fruitLog.innerHTML = `${fruitCount} (${keyCount})`
   } else {
-    fruitLog.innerHTML = fruitCount;
+    fruitCount++;
   }
+  fruitLog.innerHTML = fruitCount;
+  keysLog.innerHTML = keyCount;
 }
-incrementFruit();
+fruitLog.innerHTML = fruitCount;
+keysLog.innerHTML = keyCount;
 
 toBeat.innerHTML = getOpponentScore();
 
