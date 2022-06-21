@@ -14,30 +14,39 @@ body {
   font-size: 1.5em;
 }
 
-#static-content {
+.static-content {
   font-family: courier;
-  position: fixed;
-  left: 0;
-  top: 0;
   color: yellow;
   font-size: 16px;
+  position: fixed;
 }
 
-#static-content a {
+.static-content a {
   color: yellow;
 }
 
-#static-content table {
+.static-content table {
   margin: 0;
   padding: 0;
 }
-#static-content table th {
+.static-content table th {
   text-align: left;
   margin: 0;
   padding: 0;
   font-weight: normal;
 }
-#static-content table td {
+.static-content table td {
   margin: 0;
   padding: 0;
 }
+
+#static-content-left {
+  left: 0;
+  top: 0;
+}
+
+#static-content-right {
+  right: 0;
+  top: 0;
+}
+

@@ -19,6 +19,7 @@ var pointsLog = document.getElementById("points-log");
 var fruitLog = document.getElementById("fruit-log");
 var keysLog = document.getElementById("keys-log");
 var timer = document.getElementById("timer");
+var dotsUntilFruit = document.getElementById("dotsUntilFruit");
 
 // avoid initial movement
 setTimeout(() => {
@@ -38,6 +39,9 @@ function printLevel() {
 }
 function printPoints(points) {
   pointsLog.innerHTML = points;
+}
+function printDotsUntilFruit(i) {
+  dotsUntilFruit.innerHTML = i;
 }
 
 var killedAggregate = [];
