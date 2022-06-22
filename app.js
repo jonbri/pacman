@@ -41,6 +41,15 @@ function printPoints(points) {
   pointsLog.innerHTML = points;
 }
 function printDotsUntilFruit(i) {
+  if (i <= 5) {
+    dotsUntilFruit.style.color = 'red';
+    dotsUntilFruit.style.fontSize = '20px';
+    dotsUntilFruit.style.fontWeight = 'bold';
+  } else {
+    dotsUntilFruit.style.color = 'inherit';
+    dotsUntilFruit.style.fontSize = 'inherit';
+    dotsUntilFruit.style.fontWeight = 'inherit';
+  }
   dotsUntilFruit.innerHTML = i;
 }
 
