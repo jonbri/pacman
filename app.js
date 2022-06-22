@@ -14,6 +14,7 @@ var loading = document.getElementById("loading");
 var toBeat = document.getElementById("toBeat");
 var killedLog = document.getElementById("killed-log");
 var killsLog = document.getElementById("kills-log");
+var deathsLog = document.getElementById("deaths-log");
 var levelLog = document.getElementById("level-log");
 var pointsLog = document.getElementById("points-log");
 var fruitLog = document.getElementById("fruit-log");
@@ -91,6 +92,13 @@ function incrementKills() {
   killsLog.innerHTML = killCount;
 }
 incrementKills();
+
+var deathsCount = -1;
+function incrementDeaths() {
+  deathsCount++;
+  deathsLog.innerHTML = deathsCount;
+}
+incrementDeaths();
 
 var fruitCount = 0;
 var keyCount = 0;

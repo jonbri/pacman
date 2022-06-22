@@ -10705,6 +10705,7 @@ var playState = {
                     continue;
                 else { // killed by ghost
                     switchState(deadState);
+                    incrementDeaths();
                     addKilledLog(level);
                 }
 
