@@ -328,7 +328,7 @@ var getScore = function() {
 };
 var setScore = function(score) {
     scores[getScoreIndex()] = score;
-    printPoints(score);
+    App.setPoints(score);
 };
 
 var getHighScore = function() {
@@ -8912,7 +8912,7 @@ BaseFruit.prototype = {
     },
     onDotEat: function() {
         var dotsUntil = (map.dotsEaten < this.dotLimit1) ? this.dotLimit1 - map.dotsEaten : this.dotLimit2 - map.dotsEaten;
-        printDotsUntilFruit(dotsUntil > 0 ? dotsUntil : '');
+        App.printDotsUntilFruit(dotsUntil > 0 ? dotsUntil : '');
 
         if (!this.isPresent() && (map.dotsEaten == this.dotLimit1 || map.dotsEaten == this.dotLimit2)) {
             this.initiate();
@@ -8942,7 +8942,7 @@ BaseFruit.prototype = {
     },
     testCollide: function() {
         if (this.isPresent() && this.isCollide()) {
-            incrementFruit();
+            App.incrementFruit();
             addScore(this.getPoints());
             this.reset();
             this.scoreFramesLeft = this.scoreDuration*60;
@@ -10627,7 +10627,7 @@ var readyNewState = newChildObject(readyState, {
 
         // increment level and ready the next map
         level++;
-        setLevel(level);
+        App.setLevel(level);
         if (gameMode == GAME_PACMAN) {
             map = mapPacman;
         }
@@ -10698,15 +10698,15 @@ var playState = {
             if (g.tile.x == pacman.tile.x && g.tile.y == pacman.tile.y && g.mode == GHOST_OUTSIDE) {
                 if (g.scared) { // eat ghost
                     energizer.addPoints();
-                    incrementKills();
+                    App.incrementKills();
                     g.onEaten();
                 }
                 else if (pacman.invincible) // pass through ghost
                     continue;
                 else { // killed by ghost
                     switchState(deadState);
-                    incrementDeaths();
-                    addKilledLog(level);
+                    App.incrementDeaths();
+                    App.addKilledLog(level);
                 }
 
                 return true;

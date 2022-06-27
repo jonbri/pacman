@@ -17,7 +17,7 @@
     <script src="./lib/ticker-log.min.js"></script>
     <link rel="stylesheet" href="./lib/pace.css">
 
-    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="./app/style.css">
 
     <!-- Hide status bar -->
     <meta names="apple-mobile-web-app-status-bar-style" content="black-translucent" />
@@ -67,10 +67,12 @@
     <canvas id='atlas' style="display:none"></canvas>
     <div id="static-content-left" class="static-content">
       <div>
-        <a href="./">refresh</a>
-        <a href="./index.orig.html">original</a>
-        <a href="https://github.com/jonbri/pacman">github</a>
-        <div>24 / 197940 (JUN17'22)</div>
+      <ul id="top-links">
+        <li><a href="./">refresh</a></li>
+        <li><a href="./index.orig.html">original</a></li>
+        <li><a href="https://github.com/jonbri/pacman">github</a></li>
+      </ul>
+        <div>28 / 259490 (JUN26'22)</div>
         <hr />
       </div>
       <div id="loading">
@@ -109,7 +111,10 @@
     <div id="static-content-right" class="static-content">
       <div id="dotsUntilFruit"></div>
     </div>
-    <script src="./app.js"></script>
+    <script src="./app/loading.js"></script>
+    <script src="./app/timer.js"></script>
+    <script src="./app/opponent.js"></script>
+    <script src="./app/app.js"></script>
 </body>
 
 </html>

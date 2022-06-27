@@ -24,7 +24,7 @@ BaseFruit.prototype = {
     },
     onDotEat: function() {
         var dotsUntil = (map.dotsEaten < this.dotLimit1) ? this.dotLimit1 - map.dotsEaten : this.dotLimit2 - map.dotsEaten;
-        printDotsUntilFruit(dotsUntil > 0 ? dotsUntil : '');
+        App.printDotsUntilFruit(dotsUntil > 0 ? dotsUntil : '');
 
         if (!this.isPresent() && (map.dotsEaten == this.dotLimit1 || map.dotsEaten == this.dotLimit2)) {
             this.initiate();
@@ -54,7 +54,7 @@ BaseFruit.prototype = {
     },
     testCollide: function() {
         if (this.isPresent() && this.isCollide()) {
-            incrementFruit();
+            App.incrementFruit();
             addScore(this.getPoints());
             this.reset();
             this.scoreFramesLeft = this.scoreDuration*60;
