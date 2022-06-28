@@ -46,11 +46,13 @@ const App = {
   },
 
   render: () => {
-    function printKilledLog() {
-      // clear table
+    function clearTable() {
       while(killedLog.firstChild) {
         killedLog.removeChild(killedLog.firstChild);
       }
+    }
+    function printTable() {
+      clearTable();
       for (var i = 1; i <= App.level; i++) {
         var tr = document.createElement('tr')
         var td0 = document.createElement('th')
@@ -67,7 +69,7 @@ const App = {
         killedLog.append(tr);
       }
     }
-    printKilledLog();
+    printTable();
 
     pointsLog.innerHTML = App.points;
     levelLog.innerHTML = App.level;
