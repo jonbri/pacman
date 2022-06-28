@@ -17,27 +17,24 @@ const App = {
   deathsCount: 0,
   fruitCount: 0,
   keyCount: 0,
+  dotsUntil: '',
   opponentScore: getOpponentScore(),
 
   addKilledLog: (i) => {
     App.killedAggregate.push(i)
-    printApp();
+    App.render();
   },
-  setLevel: (i) => {
-    App.level = i;
-    printApp();
-  },
-  setPoints: (i) => {
-    App.points = i;
-    printApp();
+  set: (key, value) => {
+    App[key] = value;
+    App.render();
   },
   incrementKills: () => {
     App.killCount++;
-    printApp();
+    App.render();
   },
   incrementDeaths: () => {
     App.deathsCount++;
-    printApp();
+    App.render();
   },
   incrementFruit: () => {
     if (App.level >= 13) {
@@ -45,56 +42,57 @@ const App = {
     } else {
       App.fruitCount++;
     }
-    printApp();
+    App.render();
   },
 
-  printDotsUntilFruit: (i) => {
-    if (i <= 5) {
-      dotsUntilFruit.style.color = 'red';
-      dotsUntilFruit.style.fontSize = '20px';
-      dotsUntilFruit.style.fontWeight = 'bold';
-    } else {
-      dotsUntilFruit.style.color = 'inherit';
-      dotsUntilFruit.style.fontSize = 'inherit';
-      dotsUntilFruit.style.fontWeight = 'inherit';
+  render: () => {
+    function printKilledLog() {
+      // clear table
+      while(killedLog.firstChild) {
+        killedLog.removeChild(killedLog.firstChild);
+      }
+      var highestLevel = App.level;
+      for (var k = 1; k <= highestLevel; k++) {
+        var tr = document.createElement('tr')
+        var td0 = document.createElement('th')
+        var td1 = document.createElement('td')
+        td0.innerHTML = `${k} `;
+        var howManyPerLevel = App.killedAggregate.filter((x) => x === k).length;
+        var xString = '';
+        for (var j = 0; j < howManyPerLevel; j++) {
+          xString += "x";
+        }
+        td1.innerHTML = xString;
+        tr.append(td0)
+        tr.append(td1)
+        killedLog.append(tr);
+      }
     }
-    dotsUntilFruit.innerHTML = i;
+    printKilledLog();
+
+    function printDotsUntil() {
+      if (App.dotsUntil <= 5) {
+        dotsUntilFruit.style.color = 'red';
+        dotsUntilFruit.style.fontSize = '20px';
+        dotsUntilFruit.style.fontWeight = 'bold';
+      } else {
+        dotsUntilFruit.style.color = 'inherit';
+        dotsUntilFruit.style.fontSize = 'inherit';
+        dotsUntilFruit.style.fontWeight = 'inherit';
+      }
+      dotsUntilFruit.innerHTML = App.dotsUntil;
+    }
+    printDotsUntil();
+
+    pointsLog.innerHTML = App.points;
+    levelLog.innerHTML = App.level;
+    killsLog.innerHTML = App.killCount;
+    deathsLog.innerHTML = App.deathsCount;
+    fruitLog.innerHTML = App.fruitCount;
+    keysLog.innerHTML = App.keyCount;
+    toBeat.innerHTML = App.opponentScore;
   }
+
 };
 
-
-function printApp() {
-  function printKilledLog() {
-    // clear table
-    while(killedLog.firstChild) {
-      killedLog.removeChild(killedLog.firstChild);
-    }
-    var highestLevel = App.level;
-    for (var k = 1; k <= highestLevel; k++) {
-      var tr = document.createElement('tr')
-      var td0 = document.createElement('th')
-      var td1 = document.createElement('td')
-      td0.innerHTML = `${k} `;
-      var howManyPerLevel = App.killedAggregate.filter((x) => x === k).length;
-      var xString = '';
-      for (var j = 0; j < howManyPerLevel; j++) {
-        xString += "x";
-      }
-      td1.innerHTML = xString;
-      tr.append(td0)
-      tr.append(td1)
-      killedLog.append(tr);
-    }
-  }
-  printKilledLog();
-
-  pointsLog.innerHTML = App.points;
-  levelLog.innerHTML = App.level;
-  killsLog.innerHTML = App.killCount;
-  deathsLog.innerHTML = App.deathsCount;
-  fruitLog.innerHTML = App.fruitCount;
-  keysLog.innerHTML = App.keyCount;
-  toBeat.innerHTML = App.opponentScore;
-}
-
-printApp();
+App.render();

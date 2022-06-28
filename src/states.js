@@ -1244,7 +1244,7 @@ var readyNewState = newChildObject(readyState, {
 
         // increment level and ready the next map
         level++;
-        App.setLevel(level);
+        App.set('level', level);
         if (gameMode == GAME_PACMAN) {
             map = mapPacman;
         }

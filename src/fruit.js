@@ -24,7 +24,7 @@ BaseFruit.prototype = {
     },
     onDotEat: function() {
         var dotsUntil = (map.dotsEaten < this.dotLimit1) ? this.dotLimit1 - map.dotsEaten : this.dotLimit2 - map.dotsEaten;
-        App.printDotsUntilFruit(dotsUntil > 0 ? dotsUntil : '');
+        App.set('dotsUntil', dotsUntil > 0 ? dotsUntil : '');
 
         if (!this.isPresent() && (map.dotsEaten == this.dotLimit1 || map.dotsEaten == this.dotLimit2)) {
             this.initiate();

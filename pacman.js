@@ -328,7 +328,7 @@ var getScore = function() {
 };
 var setScore = function(score) {
     scores[getScoreIndex()] = score;
-    App.setPoints(score);
+    App.set('points', score);
 };
 
 var getHighScore = function() {
@@ -8912,7 +8912,7 @@ BaseFruit.prototype = {
     },
     onDotEat: function() {
         var dotsUntil = (map.dotsEaten < this.dotLimit1) ? this.dotLimit1 - map.dotsEaten : this.dotLimit2 - map.dotsEaten;
-        App.printDotsUntilFruit(dotsUntil > 0 ? dotsUntil : '');
+        App.set('dotsUntil', dotsUntil > 0 ? dotsUntil : '');
 
         if (!this.isPresent() && (map.dotsEaten == this.dotLimit1 || map.dotsEaten == this.dotLimit2)) {
             this.initiate();
@@ -10627,7 +10627,7 @@ var readyNewState = newChildObject(readyState, {
 
         // increment level and ready the next map
         level++;
-        App.setLevel(level);
+        App.set('level', level);
         if (gameMode == GAME_PACMAN) {
             map = mapPacman;
         }

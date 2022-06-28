@@ -255,7 +255,7 @@ var getScore = function() {
 };
 var setScore = function(score) {
     scores[getScoreIndex()] = score;
-    App.setPoints(score);
+    App.set('points', score);
 };
 
 var getHighScore = function() {
