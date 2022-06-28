@@ -51,13 +51,12 @@ const App = {
       while(killedLog.firstChild) {
         killedLog.removeChild(killedLog.firstChild);
       }
-      var highestLevel = App.level;
-      for (var k = 1; k <= highestLevel; k++) {
+      for (var i = 1; i <= App.level; i++) {
         var tr = document.createElement('tr')
         var td0 = document.createElement('th')
         var td1 = document.createElement('td')
-        td0.innerHTML = `${k} `;
-        var howManyPerLevel = App.killedAggregate.filter((x) => x === k).length;
+        td0.innerHTML = `${i} `;
+        var howManyPerLevel = App.killedAggregate.filter((x) => x === i).length;
         var xString = '';
         for (var j = 0; j < howManyPerLevel; j++) {
           xString += "x";
@@ -70,20 +69,6 @@ const App = {
     }
     printKilledLog();
 
-    function printDotsUntil() {
-      if (App.dotsUntil <= 5) {
-        dotsUntilFruit.style.color = 'red';
-        dotsUntilFruit.style.fontSize = '20px';
-        dotsUntilFruit.style.fontWeight = 'bold';
-      } else {
-        dotsUntilFruit.style.color = 'inherit';
-        dotsUntilFruit.style.fontSize = 'inherit';
-        dotsUntilFruit.style.fontWeight = 'inherit';
-      }
-      dotsUntilFruit.innerHTML = App.dotsUntil;
-    }
-    printDotsUntil();
-
     pointsLog.innerHTML = App.points;
     levelLog.innerHTML = App.level;
     killsLog.innerHTML = App.killCount;
@@ -91,6 +76,8 @@ const App = {
     fruitLog.innerHTML = App.fruitCount;
     keysLog.innerHTML = App.keyCount;
     toBeat.innerHTML = App.opponentScore;
+    dotsUntilFruit.innerHTML = App.dotsUntil;
+    dotsUntilFruit.className = App.dotsUntil !== '' && App.dotsUntil <= 5 ? 'dotsUntilRed' : '';
   }
 
 };
